@@ -36,6 +36,7 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./ya
 HEADERS += \
     cursor.h \
     phase.h \
+    repseqwithsteps.h \
     vconst.h \
     voltage_protocol.h \
     vramp.h \

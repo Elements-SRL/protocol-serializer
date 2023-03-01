@@ -8,9 +8,9 @@
 #include "vstepstep.h"
 #include "vsin.h"
 #include "yaml.h"
-
+#include "repseqwithsteps.h"
 //REMEMBER TO ADD THE IMPLEMENTED PROTOCOL HERE
-typedef variant<VConst, VRamp, VStepStep, VSin> Phase;
+typedef variant<VConst, VRamp, VStepStep, VSin, RepSeqWithSteps> Phase;
 
 
 namespace YAML {
@@ -31,6 +31,9 @@ struct convert<Phase>{
             case 3:
                 node = get<VSin>(rhs);
             break;
+            case 4:
+                node = get<RepSeqWithSteps>(rhs);
+            break;
         }
         return node;
     }
@@ -50,6 +53,9 @@ struct convert<Phase>{
         }
         else if (node["vsin"]){
             rhs.emplace<VSin>(node.as<VSin>());
+        }
+        else if (node["repseqwithsteps"]){
+            rhs.emplace<RepSeqWithSteps>(node.as<RepSeqWithSteps>());
         }
         return true;
     }
