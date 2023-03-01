@@ -18,22 +18,22 @@ using namespace std;
 using namespace YAML;
 
 struct VoltageProtocol {
-//    string name;
-//    double initial_value;
-//    string unit;
-//    bool forward_euler;
-//    int shortcutindex;
-//    operation_mode mode;
-//    double vhold;
-//    bool vholdref;
-//    int sweeps;
-//    int currentrange; //Not too sure on this one
-//    int voltagerange;
+    string name;
+    int shortcutindex;
+    int mode;
+    double vhold;
+    bool vholdref;
+    int sweeps;
+    int currentrange; //Not too sure on this one
+    int voltagerange;
+    int samplingrate;
+
+//    Maybe add volageUnit instead of voltageRange as string
 //    string voltageUnit;
-//    int samplingrate;
-//    int controls;
+//  vector<Control> controls;
     vector<Phase> phases;
     vector<Cursor> cursors;
+
 };
 
 namespace YAML {
@@ -41,6 +41,14 @@ template<>
 struct convert<VoltageProtocol>{
     static Node encode(const VoltageProtocol& rhs) {
         Node node;
+
+        node["name"] = rhs.name;
+        node["shortcutindex"] = rhs.shortcutindex;
+        node["operation_mode"] = rhs.mode;
+        node["vhold"] = rhs.vhold;
+        node["vholdref"] = rhs.vholdref;
+        node["sweeps"] = rhs.sweeps;
+        node["currentrange"] = rhs.currentrange;
         node["phases"] = rhs.phases;
         node["cursors"] = rhs.cursors;
 
@@ -54,13 +62,14 @@ struct convert<VoltageProtocol>{
             return false;
         }
         Node node = n[VOLTAGE_PROTOCOL];
-//        rhs.v0= node["symbol"].as<double>();
-//        rhs.v0ctrl= node["name"].as<double>();
-//        rhs.vfinal = node["initial_value"].as<double>();
-//        rhs.vfinalctrl = node["unit"].as<double>();
-//        rhs.t0 = node["forward_euler"].as<double>();
-//        rhs.t0ctrl = node["symbol"].as<double>();
-//        rhs.visible = node["name"].as<bool>();
+
+        rhs.name = node["name"].as<string>();
+        rhs.shortcutindex = node["shortcutindex"].as<int>();
+        rhs.mode = node["operation_mode"].as<int>();
+        rhs.vhold = node["vhold"].as<double>();
+        rhs.vholdref = node["vholdref"].as<bool>();
+        rhs.sweeps = node["sweeps"].as<int>();
+        rhs.currentrange = node["currentrange"].as<int>();
         rhs.phases = node["phases"].as<vector<Phase>>();
         rhs.cursors = node["cursors"].as<vector<Cursor>>();
         return true;
