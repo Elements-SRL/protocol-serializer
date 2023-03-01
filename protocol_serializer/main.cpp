@@ -12,6 +12,7 @@ using namespace std;
 
 int main()
 {
+//    Struct built normally
     VConst vc = {0,0,100,0,true};
     VConst vc2 = {10,10,1000,10,false};
     VRamp vr = {0,0,100,0,100,0,true};
@@ -25,11 +26,15 @@ int main()
     YAML::Node node;
     node = vp;
 
+//     Decomment these lines if you want to save to disk
+//     WARNING: changes will be saved only at the end of the execution,
+//     so comment the last lines or they will try to import an empty file
+
 //    std::ofstream fout("p.yaml");
 //    fout << node;
 
+//    Read yaml file and the node can be used as a VoltageProtocol
     YAML::Node node_taken_from_file = YAML::LoadFile("p.yaml");
     VoltageProtocol vp_from_file = node_taken_from_file.as<VoltageProtocol>();
-    cout << vp_from_file.cursors[1].itemidx << endl;
     return 0;
 }
