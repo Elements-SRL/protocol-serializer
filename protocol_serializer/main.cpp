@@ -26,10 +26,6 @@ int main()
     YAML::Node node;
     node = vp;
 
-//     Decomment these lines if you want to save to disk
-//     WARNING: changes will be saved only at the end of the execution,
-//     so comment the last lines or they will try to import an empty file
-
     std::ofstream fout("p.yaml");
     fout << node;
     fout.close();
