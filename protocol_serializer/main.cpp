@@ -25,10 +25,10 @@ int main()
     YAML::Node node;
     node = vp;
 
-//    std::ofstream fout("C:\\Users\\lucar\\p.yaml");
+//    std::ofstream fout("p.yaml");
 //    fout << node;
 
-    YAML::Node node_taken_from_file = YAML::LoadFile("C:\\Users\\lucar\\p.yaml");
+    YAML::Node node_taken_from_file = YAML::LoadFile("p.yaml");
     VoltageProtocol vp_from_file = node_taken_from_file.as<VoltageProtocol>();
     cout << vp_from_file.cursors[1].itemidx << endl;
     return 0;
