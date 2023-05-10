@@ -44,4 +44,4 @@ HEADERS += \
 target.path = $$PWD/
 INSTALLS += target
 
-include(../yaml-cpp/includeyamlcpp.pri)
+include(C:/yaml-cpp/includeyamlcpp.pri)
