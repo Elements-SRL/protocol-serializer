@@ -1,10 +1,9 @@
-#ifndef VCONST_H
-#define VCONST_H
+#ifndef VREST_H
+#define VREST_H
 #include "yaml.h"
 using namespace std;
-using namespace YAML;
 
-struct VConst {
+struct VRest {
     double v0;
     unsigned int v0ctrl;
     double t0;
@@ -14,8 +13,8 @@ struct VConst {
 
 namespace YAML {
 template<>
-struct convert<VConst>{
-    static Node encode(const VConst& rhs) {
+struct convert<VRest>{
+    static Node encode(const VRest& rhs) {
         Node node;
         node["v0"] = rhs.v0;
         node["v0ctrl"] = rhs.v0ctrl;
@@ -23,15 +22,15 @@ struct convert<VConst>{
         node["t0ctrl"] = rhs.t0ctrl;
         node["visible"] = rhs.visible;
         Node key;
-        key["vconst"] = node;
+        key["vrest"] = node;
         return key;
     }
 
-    static bool decode(const Node& node, VConst& rhs) {
-        if(!node.IsMap() || !node["vconst"]) {
+    static bool decode(const Node& node, VRest& rhs) {
+        if(!node.IsMap() || !node["vrest"]) {
             return false;
         }
-        Node value = node["vconst"];
+        Node value = node["vrest"];
         rhs.v0 = value["v0"].as<double>();
         rhs.v0ctrl = value["v0ctrl"].as<unsigned int>();
         rhs.t0 = value["t0"].as<double>();
@@ -41,4 +40,4 @@ struct convert<VConst>{
     }
 };
 }
-#endif // VCONST_H
+#endif // VREST_H

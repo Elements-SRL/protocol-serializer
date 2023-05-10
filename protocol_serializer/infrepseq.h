@@ -1,11 +1,9 @@
-#ifndef REPSEQWITHSTEPS_H
-#define REPSEQWITHSTEPS_H
+#ifndef INFREPSEQ_H
+#define INFREPSEQ_H
 #include "yaml.h"
 using namespace std;
 
-struct RepSeqWithSteps {
-    int repnum;
-    unsigned int repnumctrl;
+struct InfRepSeq {
     int itemnum;
     unsigned int itemnumctrl;
     double restvoltage;
@@ -16,11 +14,9 @@ struct RepSeqWithSteps {
 
 namespace YAML {
 template<>
-struct convert<RepSeqWithSteps>{
-    static Node encode(const RepSeqWithSteps& rhs) {
+struct convert<InfRepSeq>{
+    static Node encode(const InfRepSeq& rhs) {
         Node node;
-        node["repnum"] = rhs.repnum;
-        node["repnumctrl"] = rhs.repnumctrl;
         node["itemnum"] = rhs.itemnum;
         node["itemnumctrl"] = rhs.itemnumctrl;
         node["restvoltage"] = rhs.restvoltage;
@@ -28,18 +24,16 @@ struct convert<RepSeqWithSteps>{
         node["resttime"] = rhs.resttime;
         node["resttimectrl"] = rhs.resttimectrl;
         Node key;
-        key["repseqwithsteps"] = node;
+        key["infrepseq"] = node;
         return key;
     }
 
-    static bool decode(const Node& node, RepSeqWithSteps& rhs) {
-        if(!node.IsMap() || !node["repseqwithsteps"]) {
+    static bool decode(const Node& node, InfRepSeq& rhs) {
+        if(!node.IsMap() || !node["infrepseq"]) {
             return false;
         }
-        Node value = node["repseqwithsteps"];
+        Node value = node["infrepseq"];
 
-        rhs.repnum = value["repnum"].as<int>();
-        rhs.repnumctrl = value["repnumctrl"].as<unsigned int>();
         rhs.itemnum = value["itemnum"].as<int>();
         rhs.itemnumctrl = value["itemnumctrl"].as<unsigned int>();
         rhs.restvoltage = value["restvoltage"].as<double>();
@@ -50,4 +44,4 @@ struct convert<RepSeqWithSteps>{
     }
 };
 }
-#endif // REPSEQWITHSTEPS_H
+#endif // INFREPSEQ_H

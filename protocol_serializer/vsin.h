@@ -1,25 +1,17 @@
 #ifndef VSIN_H
 #define VSIN_H
-#include <string>
-#include <iostream>
 #include "yaml.h"
 using namespace std;
 
 struct VSin {
     double v0;
-    double v0ctrl;
+    unsigned int v0ctrl;
     double vamp;
-    double vampctrl;
+    unsigned int vampctrl;
     double freq;
-    double freqctrl;
+    unsigned int freqctrl;
     bool visible;
 };
-
-//YAML::Node toNode(VConst& vc){
-//    YAML::Node node;
-//    node = vc;
-//    return node;
-//}
 
 namespace YAML {
 template<>
@@ -40,19 +32,18 @@ struct convert<VSin>{
 
     static bool decode(const Node& node, VSin& rhs) {
         if(!node.IsMap() || !node["vsin"]) {
-            cout << "ciccia" <<endl;
             return false;
         }
         Node value = node["vsin"];
-        rhs.v0= value["v0"].as<double>();
-        rhs.v0ctrl= value["v0ctrl"].as<double>();
+        rhs.v0 = value["v0"].as<double>();
+        rhs.v0ctrl = value["v0ctrl"].as<unsigned int>();
         rhs.vamp = value["vamp"].as<double>();
-        rhs.vampctrl = value["vampctrl"].as<double>();
+        rhs.vampctrl = value["vampctrl"].as<unsigned int>();
         rhs.freq = value["freq"].as<double>();
-        rhs.freqctrl = value["freqctrl"].as<double>();
+        rhs.freqctrl = value["freqctrl"].as<unsigned int>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }
 };
 }
-#endif // VSIN_H
+#endif // ISIN_H

@@ -1,17 +1,15 @@
 #ifndef VRAMP_H
 #define VRAMP_H
-#include <string>
 #include "yaml.h"
-#include <iostream>
 using namespace std;
 
 struct VRamp {
     double v0;
-    double v0ctrl;
+    unsigned int v0ctrl;
     double vfinal;
-    double vfinalctrl;
+    unsigned int vfinalctrl;
     double t0;
-    double t0ctrl;
+    unsigned int t0ctrl;
     bool visible;
 };
 
@@ -39,11 +37,11 @@ struct convert<VRamp>{
         }
         Node node = n["vramp"];
         rhs.v0 = node["v0"].as<double>();
-        rhs.v0ctrl = node["v0ctrl"].as<double>();
+        rhs.v0ctrl = node["v0ctrl"].as<unsigned int>();
         rhs.vfinal = node["vfinal"].as<double>();
-        rhs.vfinalctrl = node["vfinalctrl"].as<double>();
+        rhs.vfinalctrl = node["vfinalctrl"].as<unsigned int>();
         rhs.t0 = node["t0"].as<double>();
-        rhs.t0ctrl = node["t0ctrl"].as<double>();
+        rhs.t0ctrl = node["t0ctrl"].as<unsigned int>();
         rhs.visible = node["visible"].as<bool>();
         return true;
     }

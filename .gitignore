@@ -33,3 +33,19 @@
 
 # Build folder
 build-protocol_serializer-Desktop_Qt_5_12_11_MSVC2017_32bit-Debug/
+yaml-cpp/test/
+yaml-cpp/docs/
+*.bazel
+*.in
+yaml-cpp/install.txt
+yaml-cpp/LICENSE
+yaml-cpp/WORKSPACE
+yaml-cpp/CONTRIBUTING.md
+yaml-cpp/CMakeLists.txt
+*.yml
+yaml-cpp/.clang-format
+yaml-cpp/.codedocs
+yaml-cpp/util/CMakeLists.txt
+yaml-cpp/src/contrib/yaml-cpp.natvis.md
+yaml-cpp/src/contrib/yaml-cpp.natvis
+yaml-cpp/README.md
