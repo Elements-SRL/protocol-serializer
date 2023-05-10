@@ -1,8 +1,9 @@
 #ifndef ISIN_H
 #define ISIN_H
+
 #include "yaml.h"
+
 using namespace std;
-using namespace YAML;
 
 struct ISin {
     double i0;

@@ -1,8 +1,9 @@
 #ifndef VCONST_H
 #define VCONST_H
+
 #include "yaml.h"
+
 using namespace std;
-using namespace YAML;
 
 struct VConst {
     double v0;

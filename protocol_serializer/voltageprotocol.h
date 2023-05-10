@@ -2,10 +2,13 @@
 #define VOLTAGEPROTOCOL_H
 
 #include <variant>
+#include <algorithm>
 
 #include "yaml.h"
 #include "phase.h"
 #include "control.h"
+#include "cursor.h"
+#include "analysis.h"
 #include "global_defines.h"
 
 using namespace std;
@@ -13,7 +16,7 @@ using namespace std;
 struct VoltageProtocol {
     string name;
     int shortcutindex;
-    int operationmode;
+    YAML::OperationMode operationmode;
     double vhold;
     bool vholdref;
     int sweeps;
@@ -23,6 +26,8 @@ struct VoltageProtocol {
 
     vector<Control> controls;
     vector<Phase> phases;
+    vector<Cursor> cursors;
+    vector<Analysis> analysis;
 };
 
 namespace YAML {
@@ -33,7 +38,7 @@ struct convert<VoltageProtocol>{
 
         node["name"] = rhs.name;
         node["shortcutindex"] = rhs.shortcutindex;
-        node["operationmode"] = rhs.operationmode;
+        node["operationmode"] = operationModeStrings[rhs.operationmode];
         node["vhold"] = rhs.vhold;
         node["vholdref"] = rhs.vholdref;
         node["sweeps"] = rhs.sweeps;
@@ -42,6 +47,8 @@ struct convert<VoltageProtocol>{
         node["samplingrate"] = rhs.samplingrate;
         node["phases"] = rhs.phases;
         node["controls"] = rhs.controls;
+        node["cursors"] = rhs.cursors;
+        node["analysis"] = rhs.analysis;
 
         Node key;
         key["voltageprotocol"] = node;
@@ -56,7 +63,7 @@ struct convert<VoltageProtocol>{
 
         rhs.name = node["name"].as<string>();
         rhs.shortcutindex = node["shortcutindex"].as<int>();
-        rhs.operationmode = node["operationmode"].as<int>();
+        rhs.operationmode = (OperationMode)(find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<string>())-operationModeStrings.begin());
         rhs.vhold = node["vhold"].as<double>();
         rhs.vholdref = node["vholdref"].as<bool>();
         rhs.sweeps = node["sweeps"].as<int>();
@@ -65,6 +72,8 @@ struct convert<VoltageProtocol>{
         rhs.samplingrate = node["samplingrate"].as<string>();
         rhs.phases = node["phases"].as<vector<Phase>>();
         rhs.controls = node["controls"].as<vector<Control>>();
+        rhs.cursors = node["cursors"].as<vector<Cursor>>();
+        rhs.analysis = node["analysis"].as<vector<Analysis>>();
         return true;
     }
 };

@@ -5,12 +5,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QT += core \
-      testlib
+    testlib
 
 SOURCES += \
-        main.cpp
+    main.cpp
 
 HEADERS += \
+    analysis.h \
     control.h \
     currentctrl.h \
     currentprotocol.h \
