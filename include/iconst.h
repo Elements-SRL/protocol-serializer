@@ -1,23 +1,23 @@
 #ifndef ICONST_H
 #define ICONST_H
-#include "yaml.h"
-using namespace std;
 
-struct IConst {
-    double v0;
-    unsigned int v0ctrl;
-    double t0;
-    unsigned int t0ctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct IConst {
+    double i0;
+    std::string i0ctrl;
+    double t0;
+    std::string t0ctrl;
+    bool visible;
+} IConst_t;
+
 template<>
 struct convert<IConst>{
     static Node encode(const IConst& rhs) {
         Node node;
-        node["i0"] = rhs.v0;
-        node["i0ctrl"] = rhs.v0ctrl;
+        node["i0"] = rhs.i0;
+        node["i0ctrl"] = rhs.i0ctrl;
         node["t0"] = rhs.t0;
         node["t0ctrl"] = rhs.t0ctrl;
         node["visible"] = rhs.visible;
@@ -31,10 +31,10 @@ struct convert<IConst>{
             return false;
         }
         Node value = node["iconst"];
-        rhs.v0 = value["i0"].as<double>();
-        rhs.v0ctrl = value["i0ctrl"].as<unsigned int>();
+        rhs.i0 = value["i0"].as<double>();
+        rhs.i0ctrl = value["i0ctrl"].as<std::string>();
         rhs.t0 = value["t0"].as<double>();
-        rhs.t0ctrl = value["t0ctrl"].as<unsigned int>();
+        rhs.t0ctrl = value["t0ctrl"].as<std::string>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }

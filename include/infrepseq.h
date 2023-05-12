@@ -1,26 +1,26 @@
 #ifndef INFREPSEQ_H
 #define INFREPSEQ_H
-#include "yaml.h"
-using namespace std;
 
-struct InfRepSeq {
-    int itemnum;
-    unsigned int itemnumctrl;
-    double restvoltage;
-    unsigned int restvoltagectrl;
-    double resttime;
-    unsigned int resttimectrl;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct InfRepSeq {
+    int itemnum;
+    std::string itemnumctrl;
+    double reststimulus;
+    std::string reststimulusctrl;
+    double resttime;
+    std::string resttimectrl;
+} InfRepSeq_t;
+
 template<>
 struct convert<InfRepSeq>{
     static Node encode(const InfRepSeq& rhs) {
         Node node;
         node["itemnum"] = rhs.itemnum;
         node["itemnumctrl"] = rhs.itemnumctrl;
-        node["restvoltage"] = rhs.restvoltage;
-        node["restvoltagectrl"] = rhs.restvoltagectrl;
+        node["reststimulus"] = rhs.reststimulus;
+        node["reststimulusctrl"] = rhs.reststimulusctrl;
         node["resttime"] = rhs.resttime;
         node["resttimectrl"] = rhs.resttimectrl;
         Node key;
@@ -35,11 +35,11 @@ struct convert<InfRepSeq>{
         Node value = node["infrepseq"];
 
         rhs.itemnum = value["itemnum"].as<int>();
-        rhs.itemnumctrl = value["itemnumctrl"].as<unsigned int>();
-        rhs.restvoltage = value["restvoltage"].as<double>();
-        rhs.restvoltagectrl = value["restvoltagectrl"].as<unsigned int>();
+        rhs.itemnumctrl = value["itemnumctrl"].as<std::string>();
+        rhs.reststimulus = value["reststimulus"].as<double>();
+        rhs.reststimulusctrl = value["reststimulusctrl"].as<std::string>();
         rhs.resttime = value["resttime"].as<double>();
-        rhs.resttimectrl = value["resttimectrl"].as<unsigned int>();
+        rhs.resttimectrl = value["resttimectrl"].as<std::string>();
         return true;
     }
 };

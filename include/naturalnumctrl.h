@@ -1,20 +1,19 @@
 #ifndef NATURALNUMCTRL_H
 #define NATURALNUMCTRL_H
+
 #include "yaml.h"
-using namespace std;
-struct NaturalNumCtrl {
-    string name;
-    unsigned int id;
-    int value;
-};
 
 namespace YAML {
+typedef struct NaturalNumCtrl {
+    std::string name;
+    int value;
+} NaturalNumCtrl_t;
+
 template<>
 struct convert<NaturalNumCtrl>{
     static Node encode(const NaturalNumCtrl& rhs) {
         Node node;
         node["name"] = rhs.name;
-        node["id"] = rhs.id;
         node["value"] = rhs.value;
         Node key;
         key["naturalnumctrl"] = node;
@@ -26,8 +25,7 @@ struct convert<NaturalNumCtrl>{
             return false;
         }
         Node value = node["naturalnumctrl"];
-        rhs.name = value["name"].as<string>();
-        rhs.id = value["id"].as<unsigned int>();
+        rhs.name = value["name"].as<std::string>();
         rhs.value = value["value"].as<int>();
         return true;
     }

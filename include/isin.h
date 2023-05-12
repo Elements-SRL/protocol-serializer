@@ -3,19 +3,17 @@
 
 #include "yaml.h"
 
-using namespace std;
-
-struct ISin {
-    double i0;
-    unsigned int i0ctrl;
-    double iamp;
-    unsigned int iampctrl;
-    double freq;
-    unsigned int freqctrl;
-    bool visible;
-};
-
 namespace YAML {
+typedef struct ISin {
+    double i0;
+    std::string i0ctrl;
+    double iamp;
+    std::string iampctrl;
+    double freq;
+    std::string freqctrl;
+    bool visible;
+} ISin_t;
+
 template<>
 struct convert<ISin>{
     static Node encode(const ISin& rhs) {
@@ -38,11 +36,11 @@ struct convert<ISin>{
         }
         Node value = node["isin"];
         rhs.i0 = value["i0"].as<double>();
-        rhs.i0ctrl = value["i0ctrl"].as<unsigned int>();
+        rhs.i0ctrl = value["i0ctrl"].as<std::string>();
         rhs.iamp = value["iamp"].as<double>();
-        rhs.iampctrl = value["iampctrl"].as<unsigned int>();
+        rhs.iampctrl = value["iampctrl"].as<std::string>();
         rhs.freq = value["freq"].as<double>();
-        rhs.freqctrl = value["freqctrl"].as<unsigned int>();
+        rhs.freqctrl = value["freqctrl"].as<std::string>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }

@@ -5,14 +5,12 @@
 #include "voltageprotocol.h"
 #include "currentprotocol.h"
 
-using namespace std;
-
-struct Protocols {
-    vector<VoltageProtocol> voltageprotocols;
-    vector<CurrentProtocol> currentprotocols;
-};
-
 namespace YAML {
+typedef struct Protocols {
+    std::vector<VoltageProtocol> voltageprotocols;
+    std::vector<CurrentProtocol> currentprotocols;
+} Protocols_t;
+
 template<>
 struct convert<Protocols>{
     static Node encode(const Protocols& rhs) {
@@ -30,8 +28,8 @@ struct convert<Protocols>{
             return false;
         }
         Node node = n["protocols"];
-        rhs.voltageprotocols = node["voltageprotocols"].as<vector<VoltageProtocol>>();
-        rhs.currentprotocols = node["currentprotocols"].as<vector<CurrentProtocol>>();
+        rhs.voltageprotocols = node["voltageprotocols"].as<std::vector<VoltageProtocol>>();
+        rhs.currentprotocols = node["currentprotocols"].as<std::vector<CurrentProtocol>>();
         return true;
     }
 };

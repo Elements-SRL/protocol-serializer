@@ -1,7 +1,6 @@
 #ifndef CURRENTPROTOCOL_H
 #define CURRENTPROTOCOL_H
 
-#include <variant>
 #include <algorithm>
 
 #include "yaml.h"
@@ -11,26 +10,24 @@
 #include "analysis.h"
 #include "global_defines.h"
 
-using namespace std;
-
-struct CurrentProtocol {
-    string name;
+namespace YAML {
+typedef struct CurrentProtocol {
+    std::string name;
     int shortcutindex;
     YAML::OperationMode operationmode;
     double vhold;
     bool vholdref;
     int sweeps;
-    string currentrange;
-    string voltagerange;
-    string samplingrate;
+    std::string currentrange;
+    std::string voltagerange;
+    std::string samplingrate;
 
-    vector<Control> controls;
-    vector<Phase> phases;
-    vector<Cursor> cursors;
-    vector<Analysis> analysis;
-};
+    std::vector<Control_t> controls;
+    std::vector<Phase_t> phases;
+    std::vector<Cursor_t> cursors;
+    std::vector<Analysis_t> analysis;
+} CurrentProtocol_t;
 
-namespace YAML {
 template<>
 struct convert<CurrentProtocol>{
     static Node encode(const CurrentProtocol& rhs) {
@@ -45,8 +42,8 @@ struct convert<CurrentProtocol>{
         node["currentrange"] = rhs.currentrange;
         node["voltagerange"] = rhs.voltagerange;
         node["samplingrate"] = rhs.samplingrate;
-        node["phases"] = rhs.phases;
         node["controls"] = rhs.controls;
+        node["phases"] = rhs.phases;
         node["cursors"] = rhs.cursors;
         node["analysis"] = rhs.analysis;
 
@@ -61,19 +58,19 @@ struct convert<CurrentProtocol>{
         }
         Node node = n["currentprotocol"];
 
-        rhs.name = node["name"].as<string>();
+        rhs.name = node["name"].as<std::string>();
         rhs.shortcutindex = node["shortcutindex"].as<int>();
-        rhs.operationmode = (OperationMode)(find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<string>())-operationModeStrings.begin());
+        rhs.operationmode = (OperationMode)(std::find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<std::string>())-operationModeStrings.begin());
         rhs.vhold = node["vhold"].as<double>();
         rhs.vholdref = node["vholdref"].as<bool>();
         rhs.sweeps = node["sweeps"].as<int>();
-        rhs.currentrange = node["currentrange"].as<string>();
-        rhs.voltagerange = node["voltagerange"].as<string>();
-        rhs.samplingrate = node["samplingrate"].as<string>();
-        rhs.phases = node["phases"].as<vector<Phase>>();
-        rhs.controls = node["controls"].as<vector<Control>>();
-        rhs.cursors = node["cursors"].as<vector<Cursor>>();
-        rhs.analysis = node["analysis"].as<vector<Analysis>>();
+        rhs.currentrange = node["currentrange"].as<std::string>();
+        rhs.voltagerange = node["voltagerange"].as<std::string>();
+        rhs.samplingrate = node["samplingrate"].as<std::string>();
+        rhs.controls = node["controls"].as<std::vector<Control_t>>();
+        rhs.phases = node["phases"].as<std::vector<Phase_t>>();
+        rhs.cursors = node["cursors"].as<std::vector<Cursor_t>>();
+        rhs.analysis = node["analysis"].as<std::vector<Analysis_t>>();
         return true;
     }
 };

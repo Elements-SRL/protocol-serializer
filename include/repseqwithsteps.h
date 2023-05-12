@@ -1,20 +1,20 @@
 #ifndef REPSEQWITHSTEPS_H
 #define REPSEQWITHSTEPS_H
-#include "yaml.h"
-using namespace std;
 
-struct RepSeqWithSteps {
-    int repnum;
-    unsigned int repnumctrl;
-    int itemnum;
-    unsigned int itemnumctrl;
-    double restvoltage;
-    unsigned int restvoltagectrl;
-    double resttime;
-    unsigned int resttimectrl;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct RepSeqWithSteps {
+    int repnum;
+    std::string repnumctrl;
+    int itemnum;
+    std::string itemnumctrl;
+    double reststimulus;
+    std::string reststimulusctrl;
+    double resttime;
+    std::string resttimectrl;
+} RepSeqWithSteps_t;
+
 template<>
 struct convert<RepSeqWithSteps>{
     static Node encode(const RepSeqWithSteps& rhs) {
@@ -23,8 +23,8 @@ struct convert<RepSeqWithSteps>{
         node["repnumctrl"] = rhs.repnumctrl;
         node["itemnum"] = rhs.itemnum;
         node["itemnumctrl"] = rhs.itemnumctrl;
-        node["restvoltage"] = rhs.restvoltage;
-        node["restvoltagectrl"] = rhs.restvoltagectrl;
+        node["reststimulus"] = rhs.reststimulus;
+        node["reststimulusctrl"] = rhs.reststimulusctrl;
         node["resttime"] = rhs.resttime;
         node["resttimectrl"] = rhs.resttimectrl;
         Node key;
@@ -39,13 +39,13 @@ struct convert<RepSeqWithSteps>{
         Node value = node["repseqwithsteps"];
 
         rhs.repnum = value["repnum"].as<int>();
-        rhs.repnumctrl = value["repnumctrl"].as<unsigned int>();
+        rhs.repnumctrl = value["repnumctrl"].as<std::string>();
         rhs.itemnum = value["itemnum"].as<int>();
-        rhs.itemnumctrl = value["itemnumctrl"].as<unsigned int>();
-        rhs.restvoltage = value["restvoltage"].as<double>();
-        rhs.restvoltagectrl = value["restvoltagectrl"].as<unsigned int>();
+        rhs.itemnumctrl = value["itemnumctrl"].as<std::string>();
+        rhs.reststimulus = value["reststimulus"].as<double>();
+        rhs.reststimulusctrl = value["reststimulusctrl"].as<std::string>();
         rhs.resttime = value["resttime"].as<double>();
-        rhs.resttimectrl = value["resttimectrl"].as<unsigned int>();
+        rhs.resttimectrl = value["resttimectrl"].as<std::string>();
         return true;
     }
 };

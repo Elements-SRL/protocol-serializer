@@ -1,21 +1,19 @@
 #ifndef VOLTAGECTRL_H
 #define VOLTAGECTRL_H
-#include "yaml.h"
-using namespace std;
 
-struct VoltageCtrl {
-    string name;
-    unsigned int id;
-    double value;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct VoltageCtrl {
+    std::string name;
+    double value;
+} VoltageCtrl_t;
+
 template<>
 struct convert<VoltageCtrl>{
     static Node encode(const VoltageCtrl& rhs) {
         Node node;
         node["name"] = rhs.name;
-        node["id"] = rhs.id;
         node["value"] = rhs.value;
         Node key;
         key["voltagectrl"] = node;
@@ -27,8 +25,7 @@ struct convert<VoltageCtrl>{
             return false;
         }
         Node value = node["voltagectrl"];
-        rhs.name = value["name"].as<string>();
-        rhs.id = value["id"].as<unsigned int>();
+        rhs.name = value["name"].as<std::string>();
         rhs.value = value["value"].as<double>();
         return true;
     }

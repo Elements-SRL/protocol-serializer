@@ -1,15 +1,15 @@
 #ifndef IHOLD_H
 #define IHOLD_H
-#include "yaml.h"
-using namespace std;
 
-struct IHold {
-    double t0;
-    unsigned int t0ctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct IHold {
+    double t0;
+    std::string t0ctrl;
+    bool visible;
+} IHold_t;
+
 template<>
 struct convert<IHold>{
     static Node encode(const IHold& rhs) {
@@ -28,7 +28,7 @@ struct convert<IHold>{
         }
         Node value = node["ihold"];
         rhs.t0 = value["t0"].as<double>();
-        rhs.t0ctrl = value["t0ctrl"].as<unsigned int>();
+        rhs.t0ctrl = value["t0ctrl"].as<std::string>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }

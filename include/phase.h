@@ -21,69 +21,69 @@
 #include "repseqscaled.h"
 #include "yaml.h"
 
-typedef variant<VHold, VConst, VStepTStep, VRest, VRamp, VSin,
-IHold, IConst, IStepTStep, IRest, IRamp, ISin,
-RepSeq, RepSeqWithSteps, InfRepSeq, RepSeqScaled> Phase;
-
 namespace YAML {
+typedef std::variant<VHold, VConst, VStepTStep, VRest, VRamp, VSin,
+IHold, IConst, IStepTStep, IRest, IRamp, ISin,
+RepSeq, RepSeqWithSteps, InfRepSeq, RepSeqScaled> Phase_t;
+
 template<>
-struct convert<Phase>{
-    static Node encode(const Phase& rhs) {
+struct convert<Phase_t>{
+    static Node encode(const Phase_t& rhs) {
         Node node;
         switch (rhs.index()) {
         case 0:
-            node = get<VHold>(rhs);
+            node = std::get<VHold>(rhs);
             break;
         case 1:
-            node = get<VConst>(rhs);
+            node = std::get<VConst>(rhs);
             break;
         case 2:
-            node = get<VStepTStep>(rhs);
+            node = std::get<VStepTStep>(rhs);
             break;
         case 3:
-            node = get<VRest>(rhs);
+            node = std::get<VRest>(rhs);
             break;
         case 4:
-            node = get<VRamp>(rhs);
+            node = std::get<VRamp>(rhs);
             break;
         case 5:
-            node = get<VSin>(rhs);
+            node = std::get<VSin>(rhs);
             break;
         case 6:
-            node = get<IHold>(rhs);
+            node = std::get<IHold>(rhs);
             break;
         case 7:
-            node = get<IConst>(rhs);
+            node = std::get<IConst>(rhs);
             break;
         case 8:
-            node = get<IStepTStep>(rhs);
+            node = std::get<IStepTStep>(rhs);
             break;
         case 9:
-            node = get<IRest>(rhs);
+            node = std::get<IRest>(rhs);
             break;
         case 10:
-            node = get<IRamp>(rhs);
+            node = std::get<IRamp>(rhs);
             break;
         case 11:
-            node = get<ISin>(rhs);
+            node = std::get<ISin>(rhs);
             break;
         case 12:
-            node = get<RepSeq>(rhs);
+            node = std::get<RepSeq>(rhs);
             break;
         case 13:
-            node = get<RepSeqWithSteps>(rhs);
+            node = std::get<RepSeqWithSteps>(rhs);
             break;
         case 14:
-            node = get<InfRepSeq>(rhs);
+            node = std::get<InfRepSeq>(rhs);
             break;
         case 15:
-            node = get<RepSeqScaled>(rhs);
+            node = std::get<RepSeqScaled>(rhs);
             break;
         }
         return node;
     }
 
-    static bool decode(const Node& node, Phase& rhs) {
+    static bool decode(const Node& node, Phase_t& rhs) {
         if(!node.IsMap()) {
             return false;
         }

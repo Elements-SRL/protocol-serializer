@@ -1,21 +1,19 @@
 #ifndef FREQUENCYCTRL_H
 #define FREQUENCYCTRL_H
-#include "yaml.h"
-using namespace std;
 
-struct FrequencyCtrl {
-    string name;
-    unsigned int id;
-    double value;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct FrequencyCtrl {
+    std::string name;
+    double value;
+} FrequencyCtrl_t;
+
 template<>
 struct convert<FrequencyCtrl>{
     static Node encode(const FrequencyCtrl& rhs) {
         Node node;
         node["name"] = rhs.name;
-        node["id"] = rhs.id;
         node["value"] = rhs.value;
         Node key;
         key["frequencyctrl"] = node;
@@ -27,8 +25,7 @@ struct convert<FrequencyCtrl>{
             return false;
         }
         Node value = node["frequencyctrl"];
-        rhs.name = value["name"].as<string>();
-        rhs.id = value["id"].as<unsigned int>();
+        rhs.name = value["name"].as<std::string>();
         rhs.value = value["value"].as<double>();
         return true;
     }

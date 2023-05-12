@@ -1,21 +1,19 @@
 #ifndef TIMECTRL_H
 #define TIMECTRL_H
-#include "yaml.h"
-using namespace std;
 
-struct TimeCtrl {
-    string name;
-    unsigned int id;
-    double value;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct TimeCtrl {
+    std::string name;
+    double value;
+} TimeCtrl_t;
+
 template<>
 struct convert<TimeCtrl>{
     static Node encode(const TimeCtrl& rhs) {
         Node node;
         node["name"] = rhs.name;
-        node["id"] = rhs.id;
         node["value"] = rhs.value;
         Node key;
         key["timectrl"] = node;
@@ -27,8 +25,7 @@ struct convert<TimeCtrl>{
             return false;
         }
         Node value = node["timectrl"];
-        rhs.name = value["name"].as<string>();
-        rhs.id = value["id"].as<unsigned int>();
+        rhs.name = value["name"].as<std::string>();
         rhs.value = value["value"].as<double>();
         return true;
     }

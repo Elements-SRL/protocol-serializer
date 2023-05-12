@@ -1,19 +1,15 @@
 #ifndef ANALYSIS_H
 #define ANALYSIS_H
 
-#include <variant>
-
 #include "global_defines.h"
 #include "yaml.h"
 
-using namespace std;
-
-struct Analysis {
-    YAML::AnalysisType type;
-    vector <int> timepoints;
-};
-
 namespace YAML {
+typedef struct Analysis {
+    YAML::AnalysisType type;
+    std::vector <int> timepoints;
+} Analysis_t;
+
 template<>
 struct convert<Analysis>{
     static Node encode(const Analysis& rhs) {
@@ -27,8 +23,8 @@ struct convert<Analysis>{
         if(node.size() != 2) {
             return false;
         }
-        rhs.type = (AnalysisType)(find(analysisStrings.begin(), analysisStrings.end(), node["type"].as<string>())-analysisStrings.begin());
-        rhs.timepoints = node["timepoints"].as<vector<int>>();
+        rhs.type = (AnalysisType)(std::find(analysisStrings.begin(), analysisStrings.end(), node["type"].as<std::string>())-analysisStrings.begin());
+        rhs.timepoints = node["timepoints"].as<std::vector<int>>();
         return true;
     }
 };

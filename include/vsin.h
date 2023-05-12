@@ -1,19 +1,19 @@
 #ifndef VSIN_H
 #define VSIN_H
-#include "yaml.h"
-using namespace std;
 
-struct VSin {
-    double v0;
-    unsigned int v0ctrl;
-    double vamp;
-    unsigned int vampctrl;
-    double freq;
-    unsigned int freqctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct VSin {
+    double v0;
+    std::string v0ctrl;
+    double vamp;
+    std::string vampctrl;
+    double freq;
+    std::string freqctrl;
+    bool visible;
+} VSin_t;
+
 template<>
 struct convert<VSin>{
     static Node encode(const VSin& rhs) {
@@ -36,11 +36,11 @@ struct convert<VSin>{
         }
         Node value = node["vsin"];
         rhs.v0 = value["v0"].as<double>();
-        rhs.v0ctrl = value["v0ctrl"].as<unsigned int>();
+        rhs.v0ctrl = value["v0ctrl"].as<std::string>();
         rhs.vamp = value["vamp"].as<double>();
-        rhs.vampctrl = value["vampctrl"].as<unsigned int>();
+        rhs.vampctrl = value["vampctrl"].as<std::string>();
         rhs.freq = value["freq"].as<double>();
-        rhs.freqctrl = value["freqctrl"].as<unsigned int>();
+        rhs.freqctrl = value["freqctrl"].as<std::string>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }

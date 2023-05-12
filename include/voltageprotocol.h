@@ -1,7 +1,6 @@
 #ifndef VOLTAGEPROTOCOL_H
 #define VOLTAGEPROTOCOL_H
 
-#include <variant>
 #include <algorithm>
 
 #include "yaml.h"
@@ -11,26 +10,24 @@
 #include "analysis.h"
 #include "global_defines.h"
 
-using namespace std;
-
+namespace YAML {
 struct VoltageProtocol {
-    string name;
+    std::string name;
     int shortcutindex;
     YAML::OperationMode operationmode;
     double vhold;
     bool vholdref;
     int sweeps;
-    string currentrange;
-    string voltagerange;
-    string samplingrate;
+    std::string currentrange;
+    std::string voltagerange;
+    std::string samplingrate;
 
-    vector<Control> controls;
-    vector<Phase> phases;
-    vector<Cursor> cursors;
-    vector<Analysis> analysis;
+    std::vector<Control_t> controls;
+    std::vector<Phase_t> phases;
+    std::vector<Cursor_t> cursors;
+    std::vector<Analysis_t> analysis;
 };
 
-namespace YAML {
 template<>
 struct convert<VoltageProtocol>{
     static Node encode(const VoltageProtocol& rhs) {
@@ -61,19 +58,19 @@ struct convert<VoltageProtocol>{
         }
         Node node = n["voltageprotocol"];
 
-        rhs.name = node["name"].as<string>();
+        rhs.name = node["name"].as<std::string>();
         rhs.shortcutindex = node["shortcutindex"].as<int>();
-        rhs.operationmode = (OperationMode)(find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<string>())-operationModeStrings.begin());
+        rhs.operationmode = (OperationMode)(std::find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<std::string>())-operationModeStrings.begin());
         rhs.vhold = node["vhold"].as<double>();
         rhs.vholdref = node["vholdref"].as<bool>();
         rhs.sweeps = node["sweeps"].as<int>();
-        rhs.currentrange = node["currentrange"].as<string>();
-        rhs.voltagerange = node["voltagerange"].as<string>();
-        rhs.samplingrate = node["samplingrate"].as<string>();
-        rhs.phases = node["phases"].as<vector<Phase>>();
-        rhs.controls = node["controls"].as<vector<Control>>();
-        rhs.cursors = node["cursors"].as<vector<Cursor>>();
-        rhs.analysis = node["analysis"].as<vector<Analysis>>();
+        rhs.currentrange = node["currentrange"].as<std::string>();
+        rhs.voltagerange = node["voltagerange"].as<std::string>();
+        rhs.samplingrate = node["samplingrate"].as<std::string>();
+        rhs.phases = node["phases"].as<std::vector<Phase_t>>();
+        rhs.controls = node["controls"].as<std::vector<Control_t>>();
+        rhs.cursors = node["cursors"].as<std::vector<Cursor_t>>();
+        rhs.analysis = node["analysis"].as<std::vector<Analysis_t>>();
         return true;
     }
 };

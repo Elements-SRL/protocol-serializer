@@ -1,19 +1,19 @@
 #ifndef VRAMP_H
 #define VRAMP_H
-#include "yaml.h"
-using namespace std;
 
-struct VRamp {
-    double v0;
-    unsigned int v0ctrl;
-    double vfinal;
-    unsigned int vfinalctrl;
-    double t0;
-    unsigned int t0ctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct VRamp {
+    double v0;
+    std::string v0ctrl;
+    double vfinal;
+    std::string vfinalctrl;
+    double t0;
+    std::string t0ctrl;
+    bool visible;
+} VRamp_t;
+
 template<>
 struct convert<VRamp>{
     static Node encode(const VRamp& rhs) {
@@ -37,11 +37,11 @@ struct convert<VRamp>{
         }
         Node node = n["vramp"];
         rhs.v0 = node["v0"].as<double>();
-        rhs.v0ctrl = node["v0ctrl"].as<unsigned int>();
+        rhs.v0ctrl = node["v0ctrl"].as<std::string>();
         rhs.vfinal = node["vfinal"].as<double>();
-        rhs.vfinalctrl = node["vfinalctrl"].as<unsigned int>();
+        rhs.vfinalctrl = node["vfinalctrl"].as<std::string>();
         rhs.t0 = node["t0"].as<double>();
-        rhs.t0ctrl = node["t0ctrl"].as<unsigned int>();
+        rhs.t0ctrl = node["t0ctrl"].as<std::string>();
         rhs.visible = node["visible"].as<bool>();
         return true;
     }

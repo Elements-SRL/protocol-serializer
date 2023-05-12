@@ -1,21 +1,21 @@
 #ifndef ITEPTSTEP_H
 #define ISTEPTSTEP_H
-#include "yaml.h"
-using namespace std;
 
-struct IStepTStep {
-    double i0;
-    unsigned int i0ctrl;
-    double istep;
-    unsigned int istepctrl;
-    double t0;
-    unsigned int t0ctrl;
-    double tstep;
-    unsigned int tstepctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct IStepTStep {
+    double i0;
+    std::string i0ctrl;
+    double istep;
+    std::string istepctrl;
+    double t0;
+    std::string t0ctrl;
+    double tstep;
+    std::string tstepctrl;
+    bool visible;
+} IStepTStep_t;
+
 template<>
 struct convert<IStepTStep>{
     static Node encode(const IStepTStep& rhs) {
@@ -40,13 +40,13 @@ struct convert<IStepTStep>{
         }
         Node value = node["isteptstep"];
         rhs.i0 = value["i0"].as<double>();
-        rhs.i0ctrl = value["i0ctrl"].as<unsigned int>();
+        rhs.i0ctrl = value["i0ctrl"].as<std::string>();
         rhs.istep = value["istep"].as<double>();
-        rhs.istepctrl = value["istepctrl"].as<unsigned int>();
+        rhs.istepctrl = value["istepctrl"].as<std::string>();
         rhs.t0 = value["t0"].as<double>();
-        rhs.t0ctrl = value["t0ctrl"].as<unsigned int>();
+        rhs.t0ctrl = value["t0ctrl"].as<std::string>();
         rhs.tstep = value["tstep"].as<double>();
-        rhs.tstepctrl = value["tstepctrl"].as<unsigned int>();
+        rhs.tstepctrl = value["tstepctrl"].as<std::string>();
         rhs.visible = value["visible"].as<bool>();
         return true;
     }

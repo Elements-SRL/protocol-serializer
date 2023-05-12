@@ -4,9 +4,8 @@
 #include "yaml.h"
 #include "global_defines.h"
 
-using namespace std;
-
-struct Cursor {
+namespace YAML {
+typedef struct Cursor {
     double xvalue;
     int itemidx;
     YAML::CursorLocationType locationtype;
@@ -17,9 +16,8 @@ struct Cursor {
     int sweepidx;
     YAML::CursorTriggerType triggertype;
     int triggeridx;
-};
+} Cursor_t;
 
-namespace YAML {
 template<>
 struct convert<Cursor>{
     static Node encode(const Cursor& rhs) {
@@ -44,13 +42,13 @@ struct convert<Cursor>{
         Node node = n;
         rhs.xvalue =  node["xvalue"].as<double>();
         rhs.itemidx = node["itemidx"].as<int>();
-        rhs.locationtype = (CursorLocationType)(find(cursorLocationStrings.begin(), cursorLocationStrings.end(), node["locationtype"].as<string>())-cursorLocationStrings.begin());
+        rhs.locationtype = (CursorLocationType)(std::find(cursorLocationStrings.begin(), cursorLocationStrings.end(), node["locationtype"].as<std::string>())-cursorLocationStrings.begin());
         rhs.locationdelay = node["locationdelay"].as<double>();
-        rhs.repetitiontype = (CursorRepetitionType)(find(cursorRepetitionStrings.begin(), cursorRepetitionStrings.end(), node["repetitiontype"].as<string>())-cursorRepetitionStrings.begin());
+        rhs.repetitiontype = (CursorRepetitionType)(std::find(cursorRepetitionStrings.begin(), cursorRepetitionStrings.end(), node["repetitiontype"].as<std::string>())-cursorRepetitionStrings.begin());
         rhs.repetitionidx = node["repetitionidx"].as<int>();
-        rhs.sweeptype = (CursorSweepType)(find(cursorSweepStrings.begin(), cursorSweepStrings.end(), node["sweeptype"].as<string>())-cursorSweepStrings.begin());
+        rhs.sweeptype = (CursorSweepType)(std::find(cursorSweepStrings.begin(), cursorSweepStrings.end(), node["sweeptype"].as<std::string>())-cursorSweepStrings.begin());
         rhs.sweepidx = node["sweepidx"].as<int>();
-        rhs.triggertype = (CursorTriggerType)(find(cursorTriggerStrings.begin(), cursorTriggerStrings.end(), node["triggertype"].as<string>())-cursorTriggerStrings.begin());
+        rhs.triggertype = (CursorTriggerType)(std::find(cursorTriggerStrings.begin(), cursorTriggerStrings.end(), node["triggertype"].as<std::string>())-cursorTriggerStrings.begin());
         rhs.triggeridx = node["triggeridx"].as<int>();
         return true;
     }

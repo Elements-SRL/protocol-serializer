@@ -10,34 +10,34 @@
 #include "naturalnumctrl.h"
 #include "yaml.h"
 
-typedef variant<VoltageCtrl, CurrentCtrl, TimeCtrl, FrequencyCtrl, NaturalNumCtrl> Control;
-
 namespace YAML {
+typedef std::variant<VoltageCtrl, CurrentCtrl, TimeCtrl, FrequencyCtrl, NaturalNumCtrl> Control_t;
+
 template<>
-struct convert<Control>{
-    static Node encode(const Control& rhs) {
+struct convert<Control_t>{
+    static Node encode(const Control_t& rhs) {
         Node node;
         switch (rhs.index()) {
         case 0:
-            node = get<VoltageCtrl>(rhs);
+            node = std::get<VoltageCtrl>(rhs);
             break;
         case 1:
-            node = get<CurrentCtrl>(rhs);
+            node = std::get<CurrentCtrl>(rhs);
             break;
         case 2:
-            node = get<TimeCtrl>(rhs);
+            node = std::get<TimeCtrl>(rhs);
             break;
         case 3:
-            node = get<FrequencyCtrl>(rhs);
+            node = std::get<FrequencyCtrl>(rhs);
             break;
         case 4:
-            node = get<NaturalNumCtrl>(rhs);
+            node = std::get<NaturalNumCtrl>(rhs);
             break;
         }
         return node;
     }
 
-    static bool decode(const Node& node, Control& rhs) {
+    static bool decode(const Node& node, Control_t& rhs) {
         if(!node.IsMap()) {
             return false;
         }

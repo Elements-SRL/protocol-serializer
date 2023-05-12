@@ -1,19 +1,19 @@
 #ifndef IRAMP_H
 #define IRAMP_H
-#include "yaml.h"
-using namespace std;
 
-struct IRamp {
-    double i0;
-    unsigned int i0ctrl;
-    double ifinal;
-    unsigned int ifinalctrl;
-    double t0;
-    unsigned int t0ctrl;
-    bool visible;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct IRamp {
+    double i0;
+    std::string i0ctrl;
+    double ifinal;
+    std::string ifinalctrl;
+    double t0;
+    std::string t0ctrl;
+    bool visible;
+} IRamp_t;
+
 template<>
 struct convert<IRamp>{
     static Node encode(const IRamp& rhs) {
@@ -37,11 +37,11 @@ struct convert<IRamp>{
         }
         Node node = n["iramp"];
         rhs.i0 = node["i0"].as<double>();
-        rhs.i0ctrl = node["i0ctrl"].as<unsigned int>();
+        rhs.i0ctrl = node["i0ctrl"].as<std::string>();
         rhs.ifinal = node["ifinal"].as<double>();
-        rhs.ifinalctrl = node["ifinalctrl"].as<unsigned int>();
+        rhs.ifinalctrl = node["ifinalctrl"].as<std::string>();
         rhs.t0 = node["t0"].as<double>();
-        rhs.t0ctrl = node["t0ctrl"].as<unsigned int>();
+        rhs.t0ctrl = node["t0ctrl"].as<std::string>();
         rhs.visible = node["visible"].as<bool>();
         return true;
     }

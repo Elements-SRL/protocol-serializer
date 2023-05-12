@@ -1,27 +1,27 @@
 #ifndef REPSEQSCALED_H
 #define REPSEQSCALED_H
-#include "yaml.h"
-using namespace std;
 
-struct RepSeqScaled {
+#include "yaml.h"
+
+namespace YAML {
+typedef struct RepSeqScaled {
     double vholdleak;
-    unsigned int vholdleakctrl;
+    std::string vholdleakctrl;
     int scalefactor;
-    unsigned int scalefactorctrl;
+    std::string scalefactorctrl;
     int repnum;
-    unsigned int repnumctrl;
+    std::string repnumctrl;
     int itemnum;
-    unsigned int itemnumctrl;
-    double restvoltage;
-    unsigned int restvoltagectrl;
+    std::string itemnumctrl;
+    double reststimulus;
+    std::string reststimulusctrl;
     double resttime;
-    unsigned int resttimectrl;
+    std::string resttimectrl;
     bool preceding;
     bool reversed;
     bool alternating;
-};
+} RepSeqScaled_t;
 
-namespace YAML {
 template<>
 struct convert<RepSeqScaled>{
     static Node encode(const RepSeqScaled& rhs) {
@@ -34,8 +34,8 @@ struct convert<RepSeqScaled>{
         node["repnumctrl"] = rhs.repnumctrl;
         node["itemnum"] = rhs.itemnum;
         node["itemnumctrl"] = rhs.itemnumctrl;
-        node["restvoltage"] = rhs.restvoltage;
-        node["restvoltagectrl"] = rhs.restvoltagectrl;
+        node["reststimulus"] = rhs.reststimulus;
+        node["reststimulusctrl"] = rhs.reststimulusctrl;
         node["resttime"] = rhs.resttime;
         node["resttimectrl"] = rhs.resttimectrl;
         node["preceding"] = rhs.preceding;
@@ -53,17 +53,17 @@ struct convert<RepSeqScaled>{
         Node value = node["repseqscaled"];
 
         rhs.vholdleak = value["vholdleak"].as<double>();
-        rhs.vholdleakctrl = value["vholdleakctrl"].as<unsigned int>();
+        rhs.vholdleakctrl = value["vholdleakctrl"].as<std::string>();
         rhs.scalefactor = value["scalefactor"].as<int>();
-        rhs.scalefactorctrl = value["scalefactorctrl"].as<unsigned int>();
+        rhs.scalefactorctrl = value["scalefactorctrl"].as<std::string>();
         rhs.repnum = value["repnum"].as<int>();
-        rhs.repnumctrl = value["repnumctrl"].as<unsigned int>();
+        rhs.repnumctrl = value["repnumctrl"].as<std::string>();
         rhs.itemnum = value["itemnum"].as<int>();
-        rhs.itemnumctrl = value["itemnumctrl"].as<unsigned int>();
-        rhs.restvoltage = value["restvoltage"].as<double>();
-        rhs.restvoltagectrl = value["restvoltagectrl"].as<unsigned int>();
+        rhs.itemnumctrl = value["itemnumctrl"].as<std::string>();
+        rhs.reststimulus = value["reststimulus"].as<double>();
+        rhs.reststimulusctrl = value["reststimulusctrl"].as<std::string>();
         rhs.resttime = value["resttime"].as<double>();
-        rhs.resttimectrl = value["resttimectrl"].as<unsigned int>();
+        rhs.resttimectrl = value["resttimectrl"].as<std::string>();
         rhs.preceding = value["preceding"].as<bool>();
         rhs.reversed = value["reversed"].as<bool>();
         rhs.alternating = value["alternating"].as<bool>();

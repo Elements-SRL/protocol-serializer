@@ -1,21 +1,19 @@
 #ifndef CURRENTCTRL_H
 #define CURRENTCTRL_H
-#include "yaml.h"
-using namespace std;
 
-struct CurrentCtrl {
-    string name;
-    unsigned int id;
-    double value;
-};
+#include "yaml.h"
 
 namespace YAML {
+typedef struct CurrentCtrl {
+    std::string name;
+    double value;
+} CurrentCtrl_t;
+
 template<>
 struct convert<CurrentCtrl>{
     static Node encode(const CurrentCtrl& rhs) {
         Node node;
         node["name"] = rhs.name;
-        node["id"] = rhs.id;
         node["value"] = rhs.value;
         Node key;
         key["currentctrl"] = node;
@@ -27,8 +25,7 @@ struct convert<CurrentCtrl>{
             return false;
         }
         Node value = node["currentctrl"];
-        rhs.name = value["name"].as<string>();
-        rhs.id = value["id"].as<unsigned int>();
+        rhs.name = value["name"].as<std::string>();
         rhs.value = value["value"].as<double>();
         return true;
     }
