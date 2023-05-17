@@ -26,57 +26,61 @@ typedef std::variant<VHold, VConst, VStepTStep, VRest, VRamp, VSin,
 IHold, IConst, IStepTStep, IRest, IRamp, ISin,
 RepSeq, RepSeqWithSteps, InfRepSeq, RepSeqScaled> Phase_t;
 
+typedef enum PhaseIdxs {VHoldIdx, VConstIdx, VStepTStepIdx, VRestIdx, VRampIdx, VSinIdx,
+                        IHoldIdx, IConstIdx, IStepTStepIdx, IRestIdx, IRampIdx, ISinIdx,
+                        RepSeqIdx, RepSeqWithStepsIdx, InfRepSeqIdx, RepSeqScaledIdx} PhaseIdxs_t;
+
 template<>
 struct convert<Phase_t>{
     static Node encode(const Phase_t& rhs) {
         Node node;
         switch (rhs.index()) {
-        case 0:
+        case VHoldIdx:
             node = std::get<VHold>(rhs);
             break;
-        case 1:
+        case VConstIdx:
             node = std::get<VConst>(rhs);
             break;
-        case 2:
+        case VStepTStepIdx:
             node = std::get<VStepTStep>(rhs);
             break;
-        case 3:
+        case VRestIdx:
             node = std::get<VRest>(rhs);
             break;
-        case 4:
+        case VRampIdx:
             node = std::get<VRamp>(rhs);
             break;
-        case 5:
+        case VSinIdx:
             node = std::get<VSin>(rhs);
             break;
-        case 6:
+        case IHoldIdx:
             node = std::get<IHold>(rhs);
             break;
-        case 7:
+        case IConstIdx:
             node = std::get<IConst>(rhs);
             break;
-        case 8:
+        case IStepTStepIdx:
             node = std::get<IStepTStep>(rhs);
             break;
-        case 9:
+        case IRestIdx:
             node = std::get<IRest>(rhs);
             break;
-        case 10:
+        case IRampIdx:
             node = std::get<IRamp>(rhs);
             break;
-        case 11:
+        case ISinIdx:
             node = std::get<ISin>(rhs);
             break;
-        case 12:
+        case RepSeqIdx:
             node = std::get<RepSeq>(rhs);
             break;
-        case 13:
+        case RepSeqWithStepsIdx:
             node = std::get<RepSeqWithSteps>(rhs);
             break;
-        case 14:
+        case InfRepSeqIdx:
             node = std::get<InfRepSeq>(rhs);
             break;
-        case 15:
+        case RepSeqScaledIdx:
             node = std::get<RepSeqScaled>(rhs);
             break;
         }

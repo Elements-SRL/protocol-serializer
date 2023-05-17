@@ -11,7 +11,7 @@
 #include "global_defines.h"
 
 namespace YAML {
-struct VoltageProtocol {
+typedef struct VoltageProtocol {
     std::string name;
     int shortcutindex;
     YAML::OperationMode operationmode;
@@ -22,11 +22,11 @@ struct VoltageProtocol {
     std::string voltagerange;
     std::string samplingrate;
 
-    std::vector<Control_t> controls;
     std::vector<Phase_t> phases;
+    std::vector<Control_t> controls;
     std::vector<Cursor_t> cursors;
     std::vector<Analysis_t> analysis;
-};
+} VoltageProtocol_t;
 
 template<>
 struct convert<VoltageProtocol>{

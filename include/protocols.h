@@ -7,8 +7,15 @@
 
 namespace YAML {
 typedef struct Protocols {
-    std::vector<VoltageProtocol> voltageprotocols;
-    std::vector<CurrentProtocol> currentprotocols;
+    std::vector<VoltageProtocol_t> voltageprotocols;
+    std::vector<CurrentProtocol_t> currentprotocols;
+
+//    void addProtocol(VoltageProtocol_t newProtocol);
+//    void addProtocol(CurrentProtocol_t newProtocol);
+//    void replaceProtocol(VoltageProtocol_t newProtocol);
+//    void replaceProtocol(CurrentProtocol_t newProtocol);
+    std::vector <std::string> getVoltageProtocolsNames();
+    std::vector <std::string> getCurrentProtocolsNames();
 } Protocols_t;
 
 template<>

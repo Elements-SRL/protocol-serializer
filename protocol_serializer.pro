@@ -16,6 +16,9 @@ CONFIG(release, debug|release) {
 
 CONFIG += staticlib
 
+SOURCES += \
+    protocols.cpp
+
 HEADERS += \
     include/analysis.h \
     include/control.h \

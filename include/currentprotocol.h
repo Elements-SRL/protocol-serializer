@@ -22,8 +22,8 @@ typedef struct CurrentProtocol {
     std::string voltagerange;
     std::string samplingrate;
 
-    std::vector<Control_t> controls;
     std::vector<Phase_t> phases;
+    std::vector<Control_t> controls;
     std::vector<Cursor_t> cursors;
     std::vector<Analysis_t> analysis;
 } CurrentProtocol_t;
@@ -42,8 +42,8 @@ struct convert<CurrentProtocol>{
         node["currentrange"] = rhs.currentrange;
         node["voltagerange"] = rhs.voltagerange;
         node["samplingrate"] = rhs.samplingrate;
-        node["controls"] = rhs.controls;
         node["phases"] = rhs.phases;
+        node["controls"] = rhs.controls;
         node["cursors"] = rhs.cursors;
         node["analysis"] = rhs.analysis;
 
@@ -67,8 +67,8 @@ struct convert<CurrentProtocol>{
         rhs.currentrange = node["currentrange"].as<std::string>();
         rhs.voltagerange = node["voltagerange"].as<std::string>();
         rhs.samplingrate = node["samplingrate"].as<std::string>();
-        rhs.controls = node["controls"].as<std::vector<Control_t>>();
         rhs.phases = node["phases"].as<std::vector<Phase_t>>();
+        rhs.controls = node["controls"].as<std::vector<Control_t>>();
         rhs.cursors = node["cursors"].as<std::vector<Cursor_t>>();
         rhs.analysis = node["analysis"].as<std::vector<Analysis_t>>();
         return true;

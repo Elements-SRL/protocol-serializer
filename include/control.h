@@ -13,24 +13,26 @@
 namespace YAML {
 typedef std::variant<VoltageCtrl, CurrentCtrl, TimeCtrl, FrequencyCtrl, NaturalNumCtrl> Control_t;
 
+typedef enum CtrlIdxs {VoltageCtrlIdx, CurrentCtrlIdx, TimeCtrlIdx, FrequencyCtrlIdx, NaturalNumCtrlIdx} CtrlIdxs_t;
+
 template<>
 struct convert<Control_t>{
     static Node encode(const Control_t& rhs) {
         Node node;
         switch (rhs.index()) {
-        case 0:
+        case VoltageCtrlIdx:
             node = std::get<VoltageCtrl>(rhs);
             break;
-        case 1:
+        case CurrentCtrlIdx:
             node = std::get<CurrentCtrl>(rhs);
             break;
-        case 2:
+        case TimeCtrlIdx:
             node = std::get<TimeCtrl>(rhs);
             break;
-        case 3:
+        case FrequencyCtrlIdx:
             node = std::get<FrequencyCtrl>(rhs);
             break;
-        case 4:
+        case NaturalNumCtrlIdx:
             node = std::get<NaturalNumCtrl>(rhs);
             break;
         }
