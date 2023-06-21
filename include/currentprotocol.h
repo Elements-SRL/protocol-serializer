@@ -15,8 +15,8 @@ typedef struct CurrentProtocol {
     std::string name;
     int shortcutindex;
     YAML::OperationMode operationmode;
-    double vhold;
-    bool vholdref;
+    double ihold;
+    bool iholdref;
     int sweeps;
     std::string currentrange;
     std::string voltagerange;
@@ -36,8 +36,8 @@ struct convert<CurrentProtocol>{
         node["name"] = rhs.name;
         node["shortcutindex"] = rhs.shortcutindex;
         node["operationmode"] = operationModeStrings[rhs.operationmode];
-        node["vhold"] = rhs.vhold;
-        node["vholdref"] = rhs.vholdref;
+        node["ihold"] = rhs.ihold;
+        node["iholdref"] = rhs.iholdref;
         node["sweeps"] = rhs.sweeps;
         node["currentrange"] = rhs.currentrange;
         node["voltagerange"] = rhs.voltagerange;
@@ -61,8 +61,8 @@ struct convert<CurrentProtocol>{
         rhs.name = node["name"].as<std::string>();
         rhs.shortcutindex = node["shortcutindex"].as<int>();
         rhs.operationmode = (OperationMode)(std::find(operationModeStrings.begin(), operationModeStrings.end(), node["operationmode"].as<std::string>())-operationModeStrings.begin());
-        rhs.vhold = node["vhold"].as<double>();
-        rhs.vholdref = node["vholdref"].as<bool>();
+        rhs.ihold = node["ihold"].as<double>();
+        rhs.iholdref = node["iholdref"].as<bool>();
         rhs.sweeps = node["sweeps"].as<int>();
         rhs.currentrange = node["currentrange"].as<std::string>();
         rhs.voltagerange = node["voltagerange"].as<std::string>();
