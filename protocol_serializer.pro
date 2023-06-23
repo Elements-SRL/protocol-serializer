@@ -56,4 +56,4 @@ DEPENDPATH += include
 target.path = $$PWD/
 INSTALLS += target
 
-include(C:/yaml-cpp/includeyamlcpp.pri)
+include($$(YAML_CPP_PATH)includeyamlcpp.pri)
