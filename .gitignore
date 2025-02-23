@@ -49,3 +49,4 @@ yaml-cpp/util/CMakeLists.txt
 yaml-cpp/src/contrib/yaml-cpp.natvis.md
 yaml-cpp/src/contrib/yaml-cpp.natvis
 yaml-cpp/README.md
+build/

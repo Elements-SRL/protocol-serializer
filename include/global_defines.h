@@ -40,14 +40,7 @@ typedef enum CursorTriggerType {
 } CursorTriggerType_t;
 
 typedef enum AnalysisType {
-    NoiseReport,
-    Histogram,
-    Spectrum,
-    MembraneTest,
-    IVGraph,
     ResistanceEstimation,
-    APThreshold,
-    APStatistics,
     AnalysisNum
 } AnalysisType_t;
 
@@ -56,7 +49,7 @@ static std::vector <std::string> cursorLocationStrings = {"from start", "to end"
 static std::vector <std::string> cursorRepetitionStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorSweepStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorTriggerStrings = {"none", "rising", "falling"};
-static std::vector <std::string> analysisStrings = {"noisereport", "histogram", "spectrum", "membranetest", "ivgraph", "resistanceestimation", "apthreshold", "apstatistics"};
+static std::vector <std::string> analysisStrings = {"resistance estimation"};
 }
 
 #endif // GLOBAL_DEFINES_H
