@@ -1,7 +1,7 @@
 #ifndef ANALYSIS_H
 #define ANALYSIS_H
 
-#include "global_defines.h"
+#include "prot_ser_global_defines.h"
 #include "yaml.h"
 
 namespace YAML {

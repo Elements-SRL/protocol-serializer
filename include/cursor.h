@@ -2,7 +2,7 @@
 #define CURSOR_H
 
 #include "yaml.h"
-#include "global_defines.h"
+#include "prot_ser_global_defines.h"
 
 namespace YAML {
 typedef struct Cursor {

@@ -26,7 +26,6 @@ HEADERS += \
     include/currentprotocol.h \
     include/cursor.h \
     include/frequencyctrl.h \
-    include/global_defines.h \
     include/iconst.h \
     include/ihold.h \
     include/infrepseq.h \
@@ -36,6 +35,7 @@ HEADERS += \
     include/isteptstep.h \
     include/naturalnumctrl.h \
     include/phase.h \
+    include/prot_ser_global_defines.h \
     include/protocols.h \
     include/repseq.h \
     include/repseqscaled.h \

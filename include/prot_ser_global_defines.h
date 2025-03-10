@@ -1,5 +1,5 @@
-#ifndef GLOBAL_DEFINES_H
-#define GLOBAL_DEFINES_H
+#ifndef PROT_SER_GLOBAL_DEFINES_H
+#define PROT_SER_GLOBAL_DEFINES_H
 
 #include <string>
 #include <vector>
@@ -41,6 +41,7 @@ typedef enum CursorTriggerType {
 
 typedef enum AnalysisType {
     ResistanceEstimation,
+    PipetteCapacitanceEstimation,
     AnalysisNum
 } AnalysisType_t;
 
@@ -49,7 +50,7 @@ static std::vector <std::string> cursorLocationStrings = {"from start", "to end"
 static std::vector <std::string> cursorRepetitionStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorSweepStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorTriggerStrings = {"none", "rising", "falling"};
-static std::vector <std::string> analysisStrings = {"resistance estimation"};
+static std::vector <std::string> analysisStrings = {"resistance estimation", "pipette capacitance estimation"};
 }
 
-#endif // GLOBAL_DEFINES_H
+#endif // PROT_SER_GLOBAL_DEFINES_H
