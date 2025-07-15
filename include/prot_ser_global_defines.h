@@ -43,6 +43,7 @@ typedef enum AnalysisType {
     ResistanceEstimation,
     PipetteCapacitanceEstimation,
     MembraneEstimation,
+    CcResistanceEstimation,
     AnalysisNum
 } AnalysisType_t;
 
@@ -51,7 +52,7 @@ static std::vector <std::string> cursorLocationStrings = {"from start", "to end"
 static std::vector <std::string> cursorRepetitionStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorSweepStrings = {"all", "last", "one"};
 static std::vector <std::string> cursorTriggerStrings = {"none", "rising", "falling"};
-static std::vector <std::string> analysisStrings = {"resistance estimation", "pipette capacitance estimation", "membrane estimation"};
+static std::vector <std::string> analysisStrings = {"resistance estimation", "pipette capacitance estimation", "membrane estimation", "cc resistance estimation"};
 }
 
 #endif // PROT_SER_GLOBAL_DEFINES_H
