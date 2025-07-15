@@ -4,8 +4,13 @@ CONFIG += console c++17 \
 CONFIG -= app_bundle
 CONFIG -= qt
 
-QT += core \
-    testlib
+include(version.pri)
+
+DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
+    "VERSION_MINOR=$$VERSION_MINOR"\
+    "VERSION_PATCH=$$VERSION_PATCH"
+
+VERSION_FULL = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}
 
 CONFIG(debug, debug|release) {
     TARGET = protocol-serializerd
