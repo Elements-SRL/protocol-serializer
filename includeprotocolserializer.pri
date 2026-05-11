@@ -1,5 +1,3 @@
-include($$(YAML_CPP_PATH)/includeyamlcpp.pri)
-
 INCLUDEPATH += \
     $$(PROTOCOL_SERIALIZER_PATH)include
 
@@ -14,3 +12,6 @@ win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$(PROTOCOL_SERIALIZ
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$(PROTOCOL_SERIALIZER_PATH)lib/debug/libprotocol-serializerd.a
 else:msvc:win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$(PROTOCOL_SERIALIZER_PATH)lib/release/protocol-serializer.lib
 else:msvc:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$(PROTOCOL_SERIALIZER_PATH)lib/debug/protocol-serializerd.lib
+
+include($$(PROTOCOL_SERIALIZER_PATH)version.pri)
+include($$(YAML_CPP_PATH)/includeyamlcpp.pri)

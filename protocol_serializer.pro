@@ -1,14 +1,14 @@
 TEMPLATE = lib
-CONFIG += console c++17 \
+CONFIG += console c++20 \
           no_testcase_installs
 CONFIG -= app_bundle
 CONFIG -= qt
 
 include(version.pri)
 
-DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
-    "VERSION_MINOR=$$VERSION_MINOR"\
-    "VERSION_PATCH=$$VERSION_PATCH"
+DEFINES += "VERSION_MAJOR=$$PROTSER_VER_MAJOR"\
+    "VERSION_MINOR=$$PROTSER_VER_MINOR"\
+    "VERSION_PATCH=$$PROTSER_VER_PATCH"
 
 VERSION_FULL = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}
 
@@ -57,8 +57,5 @@ HEADERS += \
 
 INCLUDEPATH += include
 DEPENDPATH += include
-
-target.path = $$PWD/
-INSTALLS += target
 
 include($$(YAML_CPP_PATH)includeyamlcpp.pri)
